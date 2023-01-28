@@ -1,0 +1,490 @@
+using System;
+
+namespace Guess_the_number
+{
+    internal class GuessTheNumber
+    {
+        static void Main(string[] args)
+        {
+            Random randomNumber = new Random();
+            int computerNumber = randomNumber.Next(1, 101);
+            string playerInput = "";
+            int playersNumber = 0;
+            bool MaxPeople = false;
+            string playersString;
+            int players = 0;
+            string player1;
+            string player2;
+            string player3;
+            int count1 = 3;
+            int count2 = 3;
+            int count3 = 3;
+            Console.WriteLine("Maximum players are 3!");
+            Console.Write("Enter the players: ");
+            playersString = Console.ReadLine();
+            bool isInteger = Microsoft.VisualBasic.Information.IsNumeric(playersString);
+            if (isInteger)
+            {
+                int.TryParse(playersString, out players);
+            }
+            if (players <= 3 && players > 0 && isInteger)
+            {
+                MaxPeople = true;
+            }
+            else if (players > 3)
+            {
+                Console.WriteLine("You have exceeded the limit!");
+                MaxPeople = false;
+                while (MaxPeople != true)
+                {
+                    players = int.Parse(Console.ReadLine());
+                    if (players > 0 && players <= 3)
+                    {
+                        MaxPeople = true;
+                        break;
+                    }
+                }
+            }
+            else if (players == 0 &&isInteger || players < 0 && isInteger)
+            {
+                Console.WriteLine("Minimum players is 1!");
+                MaxPeople = false;
+                while (MaxPeople != true)
+                {
+                    players = int.Parse(Console.ReadLine());
+                    if (players > 0 && players <= 3)
+                    {
+                        MaxPeople = true;
+                        break;
+                    }
+                }
+            }
+            else if (isInteger == false)
+            {
+                Console.WriteLine("Invalid input!");
+            }
+            if (MaxPeople)
+            {
+                while (true)
+                {
+                    if (players == 1)
+                    {
+                        Console.WriteLine($"You have {count1} chances!");
+                        Console.Write($"Guess a number (1-100):  ");
+                        playerInput = (Console.ReadLine());
+                        bool isValid = int.TryParse(playerInput, out playersNumber);
+                        if (isValid)
+                        {
+                            if (playersNumber == computerNumber && count1 <= 3)
+                            {
+                                Console.WriteLine("Congratulations! You have guessed the number! ");
+                                return;
+                            }
+                            else if (playersNumber < computerNumber && count1 <= 3)
+                            {
+                                Console.WriteLine("Too Low. Try Again!");
+                            }
+                            else if (playersNumber > computerNumber && count1 <= 3)
+                            {
+                                Console.WriteLine("Too Hight. Try Again!");
+                            }
+                            else if(players<0||players>3||isInteger==false)
+                            {
+                                Console.WriteLine("Invalid Input!");
+                            }
+                            count1--;
+                            if (count1 == 0)
+                            {
+                                isValid = false;
+                                Console.WriteLine($"You have {count1} chances!");
+                                Console.WriteLine("You run out of chances!Try again in the next game.");
+                                return;
+                            }
+                        }
+                        else if (isValid == false)
+                        {
+                            Console.WriteLine("Invalid input!");
+                        }
+                    }
+                    else if (players == 2)
+                    {
+                        Console.Write("Enter the name of the first player: ");
+                        player1 = Console.ReadLine();
+                        Console.Write("Enter the name of the second player: ");
+                        player2 = Console.ReadLine();
+                        Console.WriteLine($"The name of the first player is:   {player1}");
+                        Console.WriteLine($"The name of the second player is:  {player2}");
+                        Console.WriteLine($"Guess a number (1-100):");
+                        while (true)
+                        {
+                            Console.WriteLine($"You have {count1} chances!");
+                            Console.Write($"{player1} your number is: ");
+                            playerInput = (Console.ReadLine());
+                            bool isValidForFirst = int.TryParse(playerInput, out playersNumber);
+                            if (isValidForFirst)
+                            {
+                                if (playersNumber == computerNumber && count1 <= 3)
+                                {
+                                    Console.WriteLine($"Congratulations {player1}! You have guessed the number! ");
+                                    return;
+
+                                }
+                                else if (playersNumber < computerNumber && count1 <= 3)
+                                {
+                                    Console.WriteLine("Too Low. Try Again!");
+                                }
+                                else if (playersNumber > computerNumber && count1 <= 3)
+                                {
+                                    Console.WriteLine("Too Hight. Try Again!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid Input!");
+                                }
+                                count1--;
+                                if (count1 == 0)
+                                {
+                                    isValidForFirst = false;
+                                    Console.WriteLine($"{player1} you run out of chances!Try again in the next game.");
+                                    Console.WriteLine($"You have {count2} chances!");
+                                    Console.Write($"{player2} your number is: ");
+                                    playerInput = (Console.ReadLine());
+                                    bool isValidForSecondSecondGame = int.TryParse(playerInput, out playersNumber);
+                                    if (isValidForSecondSecondGame)
+                                    {
+                                        if (playersNumber == computerNumber && count2 <= 3)
+                                        {
+                                            Console.WriteLine($"Congratulations {player2}! You have guessed the number! ");
+                                            return;
+                                        }
+                                        else if (playersNumber < computerNumber && count2 <= 3)
+                                        {
+                                            Console.WriteLine("Too Low. Try Again!");
+                                        }
+                                        else if (playersNumber > computerNumber && count2 <= 3)
+                                        {
+                                            Console.WriteLine("Too Hight. Try Again!");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid Input!");
+                                        }
+                                        count2--;
+                                        if (count2 == 0)
+                                        {
+                                            isValidForSecondSecondGame = false;
+                                            Console.WriteLine($"No winner!");
+                                            return;
+
+                                        }
+                                    }
+                                }
+                            }                       
+                            else if (isValidForFirst == false)
+                            {
+                                Console.WriteLine("Invalid input!");
+                            }
+                                Console.WriteLine($"You have {count2} chances!");
+                                Console.Write($"{player2} your number is: ");
+                                playerInput = (Console.ReadLine());
+                                bool isValidForSecond = int.TryParse(playerInput, out playersNumber);
+                                if (isValidForSecond)
+                                {
+                                    if (playersNumber == computerNumber && count2 <= 3)
+                                    {
+                                        Console.WriteLine($"Congratulations {player2}! You have guessed the number! ");
+                                        return;
+                                    }
+                                    else if (playersNumber < computerNumber && count2 <= 3)
+                                    {
+                                        Console.WriteLine("Too Low. Try Again!");
+                                    }
+                                    else if (playersNumber > computerNumber && count2 <= 3)
+                                    {
+                                        Console.WriteLine("Too Hight. Try Again!");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid Input!");
+                                    }
+                                    count2--;
+                                    if (count2 == 0)
+                                    {
+                                        isValidForSecond = false;
+                                        Console.WriteLine($"{player2} you run out of chances!Try again in the next game.");
+                                        return;
+                                    }
+                                }
+                                else if (isValidForSecond == false)
+                                {
+                                    Console.WriteLine("Invalid input!");
+                                }
+                            }                         
+
+                        }                   
+                    else if (players == 3)
+                    {
+                        Console.Write("Enter the name of the first player: ");
+                        player1 = Console.ReadLine();
+                        Console.Write("Enter the name of the second player: ");
+                        player2 = Console.ReadLine();
+                        Console.Write("Enter the name of the third player: ");
+                        player3 = Console.ReadLine();
+                        Console.WriteLine($"The name of the first player is:   {player1}");
+                        Console.WriteLine($"The name of the second player is:  {player2}");
+                        Console.WriteLine($"The name of the third  player is:  {player3}");
+                        Console.WriteLine($"Guess a number (1-100):");
+                        while (true)
+                        {
+                            Console.WriteLine($"You have {count1} chances!");
+                            Console.Write($"{player1} your number is: ");
+                            playerInput = (Console.ReadLine());
+                            bool isValidForFirstPlayer = int.TryParse(playerInput, out playersNumber);
+                            if (isValidForFirstPlayer)
+                            {
+                                if (playersNumber == computerNumber)
+                                {
+                                    Console.WriteLine($"Congratulations {player1}! You have guessed the number! ");
+                                    return;
+
+                                }
+                                else if (playersNumber < computerNumber && count1 <= 3)
+                                {
+                                    Console.WriteLine("Too Low. Try Again!");
+                                }
+                                else if (playersNumber > computerNumber && count1 <= 3)
+                                {
+                                    Console.WriteLine("Too Hight. Try Again!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid Input!");
+                                }
+                                count1--;
+                                if (count1 == 0)
+                                {
+                                    isValidForFirstPlayer = false;
+                                    Console.WriteLine($"{player1} you run out of chances!Try again in the next game.");
+                                    while (playersNumber != computerNumber)
+                                    {
+                                        Console.WriteLine($"You have {count2} chances!");
+                                        Console.Write($"{player2} your number is: ");
+                                        playerInput = (Console.ReadLine());
+                                        bool isValidForSecondSecondGame = int.TryParse(playerInput, out playersNumber);
+                                        if (isValidForSecondSecondGame)
+                                        {
+                                            if (playersNumber == computerNumber)
+                                            {
+                                                Console.WriteLine($"Congratulations {player2}! You have guessed the number! ");
+                                                return;
+                                            }
+                                            else if (playersNumber < computerNumber && count2 <= 3)
+                                            {
+                                                Console.WriteLine("Too Low. Try Again!");
+                                            }
+                                            else if (playersNumber > computerNumber && count2 <= 3)
+                                            {
+                                                Console.WriteLine("Too Hight. Try Again!");
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid Input!");
+                                            }
+                                            count2--;
+                                            if (count2 == 0)
+                                            {
+                                                isValidForSecondSecondGame = false;
+                                                Console.WriteLine($"{player2} you run out of chances!Try again in the next game.");
+                                                Console.WriteLine($"You have {count3} chances!");
+                                                Console.Write($"{player3} your number is: ");
+                                                playerInput = (Console.ReadLine());
+                                                bool isValidForThirdThirdGame = int.TryParse(playerInput, out playersNumber);
+                                                if (isValidForThirdThirdGame)
+                                                {
+                                                    if (playersNumber == computerNumber)
+                                                    {
+                                                        Console.WriteLine($"Congratulations {player3}! You have guessed the number! ");
+                                                        return;
+                                                    }
+                                                    else if (playersNumber < computerNumber && count3 <= 3)
+                                                    {
+                                                        Console.WriteLine("Too Low. Try Again!");
+                                                    }
+                                                    else if (playersNumber > computerNumber && count3 <= 3)
+                                                    {
+                                                        Console.WriteLine("Too Hight. Try Again!");
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine("Invalid Input!");
+                                                    }
+                                                    count3--;
+                                                    if (count3 == 0)
+                                                    {
+                                                        isValidForThirdThirdGame = false;
+                                                        Console.WriteLine($"No winner!");
+                                                        return;
+                                                    }
+                                                }
+                                                else if (isValidForThirdThirdGame == false)
+                                                {
+                                                    Console.WriteLine("Invalid input!");
+                                                }
+                                            }
+                                            Console.WriteLine($"You have {count3} chances!");
+                                            Console.Write($"{player3} your number is: ");
+                                            playerInput = (Console.ReadLine());
+                                            bool isValidForThirdSecondGame = int.TryParse(playerInput, out playersNumber);
+                                            if (isValidForThirdSecondGame)
+                                            {
+                                                if (playersNumber == computerNumber)
+                                                {
+                                                    Console.WriteLine($"Congratulations {player3}! You have guessed the number! ");
+                                                    return;
+                                                }
+                                                else if (playersNumber < computerNumber && count3 <= 3)
+                                                {
+                                                    Console.WriteLine("Too Low. Try Again!");
+                                                }
+                                                else if (playersNumber > computerNumber && count3 <= 3)
+                                                {
+                                                    Console.WriteLine("Too Hight. Try Again!");
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("Invalid Input!");
+                                                }
+                                                count3--;
+                                                if (count3 == 0)
+                                                {
+                                                    isValidForThirdSecondGame = false;
+                                                    Console.WriteLine($"{player3} you run out of chances!{player2} is the winner!Try again in the next game.");
+                                                    return;
+                                                }
+                                            }
+                                            else if (isValidForThirdSecondGame == false)
+                                            {
+                                                Console.WriteLine("Invalid input!");
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                            else if (isValidForFirstPlayer == false)
+                            {
+                                Console.WriteLine("Invalid input!");
+                            }
+                            Console.WriteLine($"You have {count2} chances!");
+                            Console.Write($"{player2} your number is: ");
+                            playerInput = (Console.ReadLine());
+                            bool isValidForSecond = int.TryParse(playerInput, out playersNumber);
+                            if (isValidForSecond)
+                            {
+                                if (playersNumber == computerNumber)
+                                {
+                                    Console.WriteLine($"Congratulations {player2}! You have guessed the number! ");
+                                    return;
+                                }
+                                else if (playersNumber < computerNumber)
+                                {
+                                    Console.WriteLine("Too Low. Try Again!");
+                                }
+                                else if (playersNumber > computerNumber)
+                                {
+                                    Console.WriteLine("Too Hight. Try Again!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid Input!");
+                                }
+                                count2--;
+                                if (count2 == 0)
+                                {
+                                    isValidForSecond = false;
+                                    Console.WriteLine($"{player2} you run out of chances!Try again in the next game.");
+                                    Console.WriteLine($"You have {count3} chances!");
+                                    Console.Write($"{player3} your number is: ");
+                                    playerInput = (Console.ReadLine());
+                                    bool isValidForThirdThirdGame = int.TryParse(playerInput, out playersNumber);
+                                    if (isValidForThirdThirdGame)
+                                    {
+                                        if (playersNumber == computerNumber)
+                                        {
+                                            Console.WriteLine($"Congratulations {player3}! You have guessed the number! ");
+                                            return;
+                                        }
+                                        else if (playersNumber < computerNumber && count3 <= 3)
+                                        {
+                                            Console.WriteLine("Too Low. Try Again!");
+                                        }
+                                        else if (playersNumber > computerNumber && count3 <= 3)
+                                        {
+                                            Console.WriteLine("Too Hight. Try Again!");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid Input!");
+                                        }
+                                        count3--;
+                                        if (count3 == 0)
+                                        {
+                                            isValidForThirdThirdGame = false;
+                                            Console.WriteLine($"No winner!");
+                                            return;
+                                        }
+
+                                    }
+                                }
+                            }
+                            else if (isValidForSecond == false)
+                            {
+                                Console.WriteLine("Invalid input!");
+                            }
+                            Console.WriteLine($"You have {count3} chances!");
+                            Console.Write($"{player3} your number is: ");
+                            playerInput = (Console.ReadLine());
+                            bool isValidForThird = int.TryParse(playerInput, out playersNumber);
+                            if (isValidForThird)
+                            {
+                                if (playersNumber == computerNumber)
+                                {
+                                    Console.WriteLine($"Congratulations {player3}! You have guessed the number! ");
+                                    return;
+                                }
+                                else if (playersNumber < computerNumber)
+                                {
+                                    Console.WriteLine("Too Low. Try Again!");
+                                }
+                                else if (playersNumber > computerNumber)
+                                {
+                                    Console.WriteLine("Too Hight. Try Again!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid Input!");
+                                }
+                                count3--;
+                                if (count3 == 0)
+                                {
+                                    isValidForThird = false;
+                                    Console.WriteLine($"No winner!");
+                                    return;
+
+                                }
+
+                            }
+                            else if (isValidForThird == false)
+                            {
+                                Console.WriteLine("Invalid input!");
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+     }
+ }      
+    
+

@@ -1,0 +1,55 @@
+using System;
+
+namespace GuessTheNumberSimple
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            using System;
+
+namespace Guess_the_number
+    {
+        internal class GuessTheNumber
+        {
+            static void Main(string[] args)
+            {
+                Random randomNumber = new Random();
+                int computerNumber = randomNumber.Next(1, 101);
+                string playerInput = "";
+                int playersNumber = 0;
+                while (true)
+                {
+
+                    Console.Write($"Guess a number (1-100):  ");
+                    playerInput = (Console.ReadLine());
+                    bool isValid = int.TryParse(playerInput, out playersNumber);
+                    if (isValid)
+                    {
+                        if (playersNumber == computerNumber)
+                        {
+                            Console.WriteLine("Congratulations! You have guessed the number! ");
+                            return;
+                        }
+                        else if (playersNumber < computerNumber)
+                        {
+                            Console.WriteLine("Too Low. Try Again!");
+                        }
+                        else if (playersNumber > computerNumber)
+                        {
+                            Console.WriteLine("Too Hight. Try Again!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input!");
+                    }
+
+                }
+            }
+        }
+    }
+
+}
+    }
+}
